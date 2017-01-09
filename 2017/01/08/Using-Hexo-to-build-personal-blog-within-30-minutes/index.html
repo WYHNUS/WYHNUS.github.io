@@ -100,7 +100,7 @@ Ta">
 <meta property="og:image" content="http://WYHNUS.github.io/choose-ssh.png">
 <meta property="og:image" content="http://WYHNUS.github.io/basic-info-config.png">
 <meta property="og:image" content="http://WYHNUS.github.io/deployment-config.png">
-<meta property="og:updated_time" content="2017-01-09T15:51:28.000Z">
+<meta property="og:updated_time" content="2017-01-09T16:01:02.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Using Hexo to build personal blog within 30 minutes">
 <meta name="twitter:description" content="This article is intended to guide people to build their personal blog easily with Hexo which enables users to write posts in Markdown, and deploy the website using Github Pages within half an hour.
@@ -402,7 +402,7 @@ Ta">
 <h2 id="5-Deployment-15-minutes"><a href="#5-Deployment-15-minutes" class="headerlink" title="5. Deployment  (15 minutes)"></a>5. Deployment  (<em>15 minutes</em>)</h2><p>Since we will be using <a href="https://pages.github.com/" target="_blank" rel="external">Github Pages</a> to deploy our blog, the first thing to do is to register a <a href="https://github.com/" target="_blank" rel="external">Github account</a> if you haven’t done so.</p>
 <p>After registering and activating your Github account, create a new repository with name <code>&lt;Github account name&gt;.github.io</code> </p>
 <p><img src="create-repo.png" alt=""></p>
-<h5 id="Note"><a href="#Note" class="headerlink" title="Note:"></a>Note:</h5><p>Github Pages have a special naming convention for Github repository, so we have to follow the standard, for instance, my <a href="https://github.com/WYHNUS/WYHNUS.github.io" target="_blank" rel="external">blog repository</a> is named: <em> WYHNUS.github.io </em>, and later you will be access the blog via <code>http://WYHNUS.github.io</code></p>
+<h5 id="Note"><a href="#Note" class="headerlink" title="Note:"></a>Note:</h5><p>Github Pages have a special naming convention for Github repository, so we have to follow the standard, for instance, my <a href="https://github.com/WYHNUS/WYHNUS.github.io" target="_blank" rel="external">blog repository</a> is named: <em> WYHNUS.github.io </em>, and later you can access the blog via <code>http://WYHNUS.github.io</code></p>
 <p>Now, choose <em>SSH</em> instead of <em>HTTPS</em>,<br><img src="choose-ssh.png" alt=""><br>and type the following commands in your blog’s root folder:<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">git init</div><div class="line">git remote add origin git@github.com:&lt;your repo name&gt;</div><div class="line">git add .</div></pre></td></tr></table></figure></p>
 <p>Before deploy the blog, we need to install dependency via command:<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">npm install hexo-deployer-git --save</div></pre></td></tr></table></figure></p>
 <p>The last thing is to change the <a href="https://hexo.io/docs/configuration.html" target="_blank" rel="external">configuration file</a>.</p>
@@ -410,7 +410,18 @@ Ta">
 <p>Then the deployment setting based on <a href="https://github.com/hexojs/hexo-deployer-git" target="_blank" rel="external">official doc</a>, note branch need to be <code>master</code>, :<br><img src="deployment-config.png" alt=""> </p>
 <p>Now you can finally deploy your blog via following command!<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">hexo clean</div><div class="line">hexo generate</div><div class="line">hexo deploy</div></pre></td></tr></table></figure></p>
 <p>Happy posting!</p>
-<h5 id="Note-1"><a href="#Note-1" class="headerlink" title="Note:"></a>Note:</h5><p>If you encounter following error message, it means the local folder is not properly connected with Github via SSH:<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">Permission denied (publickey).</div><div class="line">fatal: Could not read from remote repository.</div><div class="line">Please make sure you have the correct access rights</div><div class="line">and the repository exists.</div></pre></td></tr></table></figure></p>
+<h5 id="Note-1"><a href="#Note-1" class="headerlink" title="Note:"></a>Note:</h5><ol>
+<li><p>Since only the static content under <code>public</code> folder will be deployed on Github, every time a new post is created or an old post is updated, you need to run the above-mentioned three commands:</p>
+<ul>
+<li>delete <code>db.json</code> file and everything under <code>public</code> folder via <code>hexo clean</code> </li>
+<li>re-build them again via <code>hexo generate</code> </li>
+<li>finally deploy via <code>hexo deploy</code>.</li>
+</ul>
+</li>
+<li><p>If you encounter following error message, it means the local folder is not properly connected with Github via SSH:</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">Permission denied (publickey).</div><div class="line">fatal: Could not read from remote repository.</div><div class="line">Please make sure you have the correct access rights</div><div class="line">and the repository exists.</div></pre></td></tr></table></figure>
+</li>
+</ol>
 <p>The problem can be easily solved by following Github’s <a href="https://help.github.com/articles/generating-an-ssh-key/" target="_blank" rel="external">official guide</a> :)</p>
 <h2 id="Acknowledgement"><a href="#Acknowledgement" class="headerlink" title="Acknowledgement:"></a>Acknowledgement:</h2><ul>
 <li><a href="https://hexo.io/docs/index.html" target="_blank" rel="external">Hexo official website</a></li>
