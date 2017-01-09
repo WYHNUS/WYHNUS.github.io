@@ -1,0 +1,732 @@
+<!doctype html>
+
+
+
+  
+
+
+<html class="theme-next muse use-motion" lang="en">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+  
+  
+  
+  
+
+  
+    
+    
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+    
+    
+    <link href="//fonts.googleapis.com/css?family=Lato:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+  
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.0" rel="stylesheet" type="text/css" />
+
+
+  <meta name="keywords" content="Tech,Guide,Hexo,Git,Node.js," />
+
+
+
+
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=5.1.0" />
+
+
+
+
+
+
+<meta name="description" content="This article is intended to guide people to build their personal blog easily with Hexo which enables users to write posts in Markdown, and deploy the website using Github Pages within half an hour.
+Ta">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Using Hexo to build personal blog within 30 minutes">
+<meta property="og:url" content="http://WYHNUS.github.io/2017/01/08/Using-Hexo-to-build-personal-blog-within-30-minutes/index.html">
+<meta property="og:site_name" content="Xirvana">
+<meta property="og:description" content="This article is intended to guide people to build their personal blog easily with Hexo which enables users to write posts in Markdown, and deploy the website using Github Pages within half an hour.
+Ta">
+<meta property="og:image" content="http://WYHNUS.github.io/hexo-default-home.png">
+<meta property="og:image" content="http://WYHNUS.github.io/First-Post.png">
+<meta property="og:image" content="http://WYHNUS.github.io/post-hide.png">
+<meta property="og:image" content="http://WYHNUS.github.io/theme.png">
+<meta property="og:image" content="http://WYHNUS.github.io/create-repo.png">
+<meta property="og:image" content="http://WYHNUS.github.io/choose-ssh.png">
+<meta property="og:image" content="http://WYHNUS.github.io/basic-info-config.png">
+<meta property="og:image" content="http://WYHNUS.github.io/deployment-config.png">
+<meta property="og:updated_time" content="2017-01-09T15:51:28.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Using Hexo to build personal blog within 30 minutes">
+<meta name="twitter:description" content="This article is intended to guide people to build their personal blog easily with Hexo which enables users to write posts in Markdown, and deploy the website using Github Pages within half an hour.
+Ta">
+<meta name="twitter:image" content="http://WYHNUS.github.io/hexo-default-home.png">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Muse',
+    sidebar: {"position":"left","display":"hide"},
+    fancybox: true,
+    motion: true,
+    duoshuo: {
+      userId: '0',
+      author: 'Author'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://WYHNUS.github.io/2017/01/08/Using-Hexo-to-build-personal-blog-within-30-minutes/"/>
+
+
+
+
+
+  <title> Using Hexo to build personal blog within 30 minutes | Xirvana </title>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="en">
+
+  
+
+
+<script>
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+            (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+          m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+  ga('create', 'UA-83446936-2', 'auto');
+  ga('send', 'pageview');
+</script>
+
+
+
+
+
+
+
+
+
+  
+  
+    
+  
+
+  <div class="container one-collumn sidebar-position-left page-post-detail ">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-meta ">
+  
+
+  <div class="custom-logo-site-title">
+    <a href="/"  class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <span class="site-title">Xirvana</span>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+  </div>
+    
+      <p class="site-subtitle"></p>
+    
+</div>
+
+<div class="site-nav-toggle">
+  <button>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+  </button>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            Home
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-user"></i> <br />
+            
+            About
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            Archives
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            Tags
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+  <link itemprop="mainEntityOfPage" href="http://WYHNUS.github.io/2017/01/08/Using-Hexo-to-build-personal-blog-within-30-minutes/">
+
+  <span style="display:none" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <meta itemprop="name" content="Wang Yanhao">
+    <meta itemprop="description" content="">
+    <meta itemprop="image" content="/images/avatar.gif">
+  </span>
+
+  <span style="display:none" itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+    <meta itemprop="name" content="Xirvana">
+    <span style="display:none" itemprop="logo" itemscope itemtype="http://schema.org/ImageObject">
+      <img style="display:none;" itemprop="url image" alt="Xirvana" src="">
+    </span>
+  </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                Using Hexo to build personal blog within 30 minutes
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2017-01-08T12:10:59+08:00">
+                2017-01-08
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+
+          
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <p>This article is intended to guide people to build their personal blog easily with <a href="https://hexo.io/" target="_blank" rel="external">Hexo</a> which enables users to write posts in <a href="http://daringfireball.net/projects/markdown/" target="_blank" rel="external">Markdown</a>, and deploy the website using <a href="https://pages.github.com/" target="_blank" rel="external">Github Pages</a> within half an hour.</p>
+<p>Table of content:</p>
+<ol>
+<li>Install dependancies: node.js, hexo, git (<em>5 minutes</em>)</li>
+<li>Hexo basics (<em>3 minutes</em>)</li>
+<li>Write your first blog post (<em>3 minutes</em>)</li>
+<li>Hexo themes and other configuration (<em>3 minutes</em>)</li>
+<li>Deployment (<em>15 minutes</em>)</li>
+</ol>
+<a id="more"></a>
+<h2 id="1-Install-dependancies-5-minutes"><a href="#1-Install-dependancies-5-minutes" class="headerlink" title="1. Install dependancies  (5 minutes)"></a>1. Install dependancies  (<em>5 minutes</em>)</h2><p>You can follow the official <a href="https://hexo.io/docs/" target="_blank" rel="external">instruction</a>, or follow the steps below if you are a Mac or Windows user.</p>
+<p>Mac OS:<br>Enter following command in terminal to install brew, git, node and hexo:<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">/usr/bin/ruby -e &quot;$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)&quot;</div><div class="line">brew install git</div><div class="line">brew install node</div><div class="line">npm install hexo-cli -g</div></pre></td></tr></table></figure></p>
+<p>Windows:</p>
+<ol>
+<li>install git: download and install from <a href="https://git-for-windows.github.io/" target="_blank" rel="external">here</a></li>
+<li>install node and npm: download and install from <a href="https://nodejs.org/en/download/" target="_blank" rel="external">here</a><br> <em> You might have to restart your computer in order to run Node.js </em></li>
+<li>install hexo with npm: <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">npm install hexo-cli -g</div></pre></td></tr></table></figure>
+</li>
+</ol>
+<p>Now you are ready to proceed. :)</p>
+<h2 id="2-Hexo-basics-3-minutes"><a href="#2-Hexo-basics-3-minutes" class="headerlink" title="2. Hexo basics  (3 minutes)"></a>2. Hexo basics  (<em>3 minutes</em>)</h2><p>Basic commands:</p>
+<ul>
+<li><p>To create a blog where <em> file_name </em> is the blog name:</p>
+  <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">hexo init &lt;file_name&gt;</div></pre></td></tr></table></figure>
+</li>
+<li><p>To create a new post: </p>
+  <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">hexo new &lt;post_name&gt;</div></pre></td></tr></table></figure>
+</li>
+<li><p>To generate static files: </p>
+  <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">hexo generate # or simply `hexo g`</div></pre></td></tr></table></figure>
+</li>
+<li><p>To preview the website locally: </p>
+  <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">hexo server # or simply `hexo s`</div></pre></td></tr></table></figure>
+</li>
+<li><p>To deploy the website on remote server (<em>in our case, Github</em>): </p>
+  <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">hexo deploy # or simply `hexo d`</div></pre></td></tr></table></figure>
+</li>
+</ul>
+<p><em> You can refer to <a href="https://hexo.io/docs/commands.html" target="_blank" rel="external">official document</a> for a full list of hexo commands. </em></p>
+<p>To create your own blog, type the following commands in terminal:<br>    <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">hexo init &lt;your blog name&gt;</div><div class="line">cd &lt;your blog name&gt;</div><div class="line">hexo server</div></pre></td></tr></table></figure></p>
+<p>Now you can preview your blog via: <a href="http://localhost:4000/" target="_blank" rel="external">http://localhost:4000/</a></p>
+<p><img src="hexo-default-home.png" alt=""></p>
+<h5 id="Tips"><a href="#Tips" class="headerlink" title="Tips"></a>Tips</h5><p><em> You can press <code>ctrl</code> and <code>c</code> together to stop server </em></p>
+<h2 id="3-Write-your-first-blog-post-3-minutes"><a href="#3-Write-your-first-blog-post-3-minutes" class="headerlink" title="3. Write your first blog post  (3 minutes)"></a>3. Write your first blog post  (<em>3 minutes</em>)</h2><p>Use <code>hexo new &lt;post_name&gt;</code> to create a blog post<br>For example, let’s create our first post:<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">hexo new &quot;First Post&quot;</div></pre></td></tr></table></figure></p>
+<p>You can edit the content of the post under <em> source/_posts/First-Post </em></p>
+<p><img src="First-Post.png" alt=""></p>
+<p>Using <code>hexo s</code> to start server and see your own post via <a href="http://localhost:4000/" target="_blank" rel="external">http://localhost:4000/</a></p>
+<h5 id="Tips-1"><a href="#Tips-1" class="headerlink" title="Tips"></a>Tips</h5><p>To avoid showing the whole content of the post in preview, you can add the line: <code>&lt;!--more--&gt;</code></p>
+<p><img src="post-hide.png" alt=""><br>Give it a try! :)</p>
+<h2 id="4-Hexo-themes-3-minutes"><a href="#4-Hexo-themes-3-minutes" class="headerlink" title="4. Hexo themes  (3 minutes)"></a>4. Hexo themes  (<em>3 minutes</em>)</h2><p>If you don’t like the default theme, there are a variety of <a href="https://hexo.io/themes/" target="_blank" rel="external">fancy themes</a> to choose from.</p>
+<p>You can follow the instructions given in each theme’s introduction to install them.<br>For instance, this blog is built using <a href="https://github.com/iissnan/hexo-theme-next" target="_blank" rel="external">NexT</a><br>To install, simply use command<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">git clone https://github.com/iissnan/hexo-theme-next themes/next</div></pre></td></tr></table></figure></p>
+<p>And change theme in blog root’s _config.yml file to <code>theme: next</code></p>
+<p><img src="theme.png" alt=""></p>
+<h2 id="5-Deployment-15-minutes"><a href="#5-Deployment-15-minutes" class="headerlink" title="5. Deployment  (15 minutes)"></a>5. Deployment  (<em>15 minutes</em>)</h2><p>Since we will be using <a href="https://pages.github.com/" target="_blank" rel="external">Github Pages</a> to deploy our blog, the first thing to do is to register a <a href="https://github.com/" target="_blank" rel="external">Github account</a> if you haven’t done so.</p>
+<p>After registering and activating your Github account, create a new repository with name <code>&lt;Github account name&gt;.github.io</code> </p>
+<p><img src="create-repo.png" alt=""></p>
+<h5 id="Note"><a href="#Note" class="headerlink" title="Note:"></a>Note:</h5><p>Github Pages have a special naming convention for Github repository, so we have to follow the standard, for instance, my <a href="https://github.com/WYHNUS/WYHNUS.github.io" target="_blank" rel="external">blog repository</a> is named: <em> WYHNUS.github.io </em>, and later you will be access the blog via <code>http://WYHNUS.github.io</code></p>
+<p>Now, choose <em>SSH</em> instead of <em>HTTPS</em>,<br><img src="choose-ssh.png" alt=""><br>and type the following commands in your blog’s root folder:<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">git init</div><div class="line">git remote add origin git@github.com:&lt;your repo name&gt;</div><div class="line">git add .</div></pre></td></tr></table></figure></p>
+<p>Before deploy the blog, we need to install dependency via command:<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">npm install hexo-deployer-git --save</div></pre></td></tr></table></figure></p>
+<p>The last thing is to change the <a href="https://hexo.io/docs/configuration.html" target="_blank" rel="external">configuration file</a>.</p>
+<p>You may want to update your site’s basic information, such as title, url (which should be <code>http://&lt;your Github account name&gt;.github.io</code>), and author:<br><img src="basic-info-config.png" alt=""></p>
+<p>Then the deployment setting based on <a href="https://github.com/hexojs/hexo-deployer-git" target="_blank" rel="external">official doc</a>, note branch need to be <code>master</code>, :<br><img src="deployment-config.png" alt=""> </p>
+<p>Now you can finally deploy your blog via following command!<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">hexo clean</div><div class="line">hexo generate</div><div class="line">hexo deploy</div></pre></td></tr></table></figure></p>
+<p>Happy posting!</p>
+<h5 id="Note-1"><a href="#Note-1" class="headerlink" title="Note:"></a>Note:</h5><p>If you encounter following error message, it means the local folder is not properly connected with Github via SSH:<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">Permission denied (publickey).</div><div class="line">fatal: Could not read from remote repository.</div><div class="line">Please make sure you have the correct access rights</div><div class="line">and the repository exists.</div></pre></td></tr></table></figure></p>
+<p>The problem can be easily solved by following Github’s <a href="https://help.github.com/articles/generating-an-ssh-key/" target="_blank" rel="external">official guide</a> :)</p>
+<h2 id="Acknowledgement"><a href="#Acknowledgement" class="headerlink" title="Acknowledgement:"></a>Acknowledgement:</h2><ul>
+<li><a href="https://hexo.io/docs/index.html" target="_blank" rel="external">Hexo official website</a></li>
+<li><a href="http://jiji262.github.io/2016/04/15/2016-04-15-hexo-github-pages-blog/" target="_blank" rel="external">手把手教你使用Hexo + Github Pages搭建个人独立博客</a></li>
+</ul>
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/Tech/" rel="tag"># Tech</a>
+          
+            <a href="/tags/Guide/" rel="tag"># Guide</a>
+          
+            <a href="/tags/Hexo/" rel="tag"># Hexo</a>
+          
+            <a href="/tags/Git/" rel="tag"># Git</a>
+          
+            <a href="/tags/Node-js/" rel="tag"># Node.js</a>
+          
+        </div>
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2017/01/03/《放学后》/" rel="next" title="《放学后》">
+                <i class="fa fa-chevron-left"></i> 《放学后》
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+  <div class="comments" id="comments">
+    
+  </div>
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+            Table of Contents
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            Overview
+          </li>
+        </ul>
+      
+
+      <section class="site-overview sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+          <img class="site-author-image" itemprop="image"
+               src="/images/avatar.gif"
+               alt="Wang Yanhao" />
+          <p class="site-author-name" itemprop="name">Wang Yanhao</p>
+          <p class="site-description motion-element" itemprop="description">Yanhao's Blog | xirvana | Java | Javascript | 读后感</p>
+        </div>
+        <nav class="site-state motion-element">
+        
+          
+            <div class="site-state-item site-state-posts">
+              <a href="/archives">
+                <span class="site-state-item-count">3</span>
+                <span class="site-state-item-name">posts</span>
+              </a>
+            </div>
+          
+
+          
+
+          
+            <div class="site-state-item site-state-tags">
+              <a href="/tags">
+                <span class="site-state-item-count">8</span>
+                <span class="site-state-item-name">tags</span>
+              </a>
+            </div>
+          
+
+        </nav>
+
+        
+
+        <div class="links-of-author motion-element">
+          
+        </div>
+
+        
+        
+
+        
+        
+
+        
+
+
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#1-Install-dependancies-5-minutes"><span class="nav-number">1.</span> <span class="nav-text">1. Install dependancies  (5 minutes)</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#2-Hexo-basics-3-minutes"><span class="nav-number">2.</span> <span class="nav-text">2. Hexo basics  (3 minutes)</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#Tips"><span class="nav-number">2.0.0.1.</span> <span class="nav-text">Tips</span></a></li></ol></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#3-Write-your-first-blog-post-3-minutes"><span class="nav-number">3.</span> <span class="nav-text">3. Write your first blog post  (3 minutes)</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#Tips-1"><span class="nav-number">3.0.0.1.</span> <span class="nav-text">Tips</span></a></li></ol></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#4-Hexo-themes-3-minutes"><span class="nav-number">4.</span> <span class="nav-text">4. Hexo themes  (3 minutes)</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#5-Deployment-15-minutes"><span class="nav-number">5.</span> <span class="nav-text">5. Deployment  (15 minutes)</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#Note"><span class="nav-number">5.0.0.1.</span> <span class="nav-text">Note:</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#Note-1"><span class="nav-number">5.0.0.2.</span> <span class="nav-text">Note:</span></a></li></ol></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Acknowledgement"><span class="nav-number">6.</span> <span class="nav-text">Acknowledgement:</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright" >
+  
+  &copy; 
+  <span itemprop="copyrightYear">2017</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Wang Yanhao</span>
+</div>
+
+
+<div class="powered-by">
+  Powered by <a class="theme-link" href="https://hexo.io">Hexo</a>
+</div>
+
+<div class="theme-info">
+  Theme -
+  <a class="theme-link" href="https://github.com/iissnan/hexo-theme-next">
+    NexT.Muse
+  </a>
+</div>
+
+
+        
+
+        
+      </div>
+    </footer>
+
+    <div class="back-to-top">
+      <i class="fa fa-arrow-up"></i>
+    </div>
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+  
+  <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+
+  
+  <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+
+  
+  <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.0"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.0"></script>
+
+
+
+  
+  
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.0"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.0"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.0"></script>
+
+
+
+  
+
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+  
+  
+
+  
+
+  
+
+  
+
+  
+
+
+</body>
+</html>
