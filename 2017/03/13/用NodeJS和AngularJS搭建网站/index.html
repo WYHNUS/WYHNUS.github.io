@@ -1,0 +1,737 @@
+<!doctype html>
+
+
+
+  
+
+
+<html class="theme-next muse use-motion" lang="en">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+  
+  
+  
+  
+
+  
+    
+    
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+    
+    
+    <link href="//fonts.googleapis.com/css?family=Lato:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+  
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.0" rel="stylesheet" type="text/css" />
+
+
+  <meta name="keywords" content="技术,教程,Node.js,AngularJS," />
+
+
+
+
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=5.1.0" />
+
+
+
+
+
+
+<meta name="description" content="最近几年网页开发越来越容易上手，近半年来写了好几个网页的demo，觉得用 NodeJS 做后端，AngularJS 写前端的开发速度很快，并且不需要在多语言间来回切换，很适合用来快速做网页的MVP(最简可行产品)。
+以下教程适用于 NodeJS 和任意前端框架组合 (如 React.js, Vue.js等)">
+<meta property="og:type" content="article">
+<meta property="og:title" content="20分钟用NodeJS和AngularJS搭建网站">
+<meta property="og:url" content="http://WYHNUS.github.io/2017/03/13/用NodeJS和AngularJS搭建网站/index.html">
+<meta property="og:site_name" content="Xirvana">
+<meta property="og:description" content="最近几年网页开发越来越容易上手，近半年来写了好几个网页的demo，觉得用 NodeJS 做后端，AngularJS 写前端的开发速度很快，并且不需要在多语言间来回切换，很适合用来快速做网页的MVP(最简可行产品)。
+以下教程适用于 NodeJS 和任意前端框架组合 (如 React.js, Vue.js等)">
+<meta property="og:image" content="http://WYHNUS.github.io/folder_structure.png">
+<meta property="og:updated_time" content="2017-03-13T17:12:35.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="20分钟用NodeJS和AngularJS搭建网站">
+<meta name="twitter:description" content="最近几年网页开发越来越容易上手，近半年来写了好几个网页的demo，觉得用 NodeJS 做后端，AngularJS 写前端的开发速度很快，并且不需要在多语言间来回切换，很适合用来快速做网页的MVP(最简可行产品)。
+以下教程适用于 NodeJS 和任意前端框架组合 (如 React.js, Vue.js等)">
+<meta name="twitter:image" content="http://WYHNUS.github.io/folder_structure.png">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Muse',
+    sidebar: {"position":"left","display":"hide"},
+    fancybox: true,
+    motion: true,
+    duoshuo: {
+      userId: '0',
+      author: 'Author'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://WYHNUS.github.io/2017/03/13/用NodeJS和AngularJS搭建网站/"/>
+
+
+
+
+
+  <title> 20分钟用NodeJS和AngularJS搭建网站 | Xirvana </title>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="en">
+
+  
+
+
+<script>
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+            (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+          m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+  ga('create', 'UA-83446936-2', 'auto');
+  ga('send', 'pageview');
+</script>
+
+
+
+
+
+
+
+
+
+  
+  
+    
+  
+
+  <div class="container one-collumn sidebar-position-left page-post-detail ">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-meta ">
+  
+
+  <div class="custom-logo-site-title">
+    <a href="/"  class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <span class="site-title">Xirvana</span>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+  </div>
+    
+      <p class="site-subtitle"></p>
+    
+</div>
+
+<div class="site-nav-toggle">
+  <button>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+  </button>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            Home
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-user"></i> <br />
+            
+            About
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            Archives
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            Tags
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+  <link itemprop="mainEntityOfPage" href="http://WYHNUS.github.io/2017/03/13/用NodeJS和AngularJS搭建网站/">
+
+  <span style="display:none" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <meta itemprop="name" content="Wang Yanhao">
+    <meta itemprop="description" content="">
+    <meta itemprop="image" content="/images/avatar.gif">
+  </span>
+
+  <span style="display:none" itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+    <meta itemprop="name" content="Xirvana">
+    <span style="display:none" itemprop="logo" itemscope itemtype="http://schema.org/ImageObject">
+      <img style="display:none;" itemprop="url image" alt="Xirvana" src="">
+    </span>
+  </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                20分钟用NodeJS和AngularJS搭建网站
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2017-03-13T00:25:18+08:00">
+                2017-03-13
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+
+          
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <p>最近几年网页开发越来越容易上手，近半年来写了好几个网页的demo，觉得用 NodeJS 做后端，AngularJS 写前端的开发速度很快，并且不需要在多语言间来回切换，很适合用来快速做网页的MVP(最简可行产品)。</p>
+<p>以下教程适用于 NodeJS 和任意前端框架组合 (如 React.js, Vue.js等)</p>
+<a id="more"></a>
+<p>大纲：</p>
+<ol>
+<li>安装node.js和npm (<em>3 minutes</em>)</li>
+<li>了解文件夹结构 (<em>3 minutes</em>)</li>
+<li>安装依赖模块 (<em>2 minutes</em>)</li>
+<li>编写 home.jade (<em>2 minutes</em>)</li>
+<li>编写 node.js 的入口文件 (<em>5 minutes</em>)</li>
+<li>编写 AngularJS 的入口文件 (<em>5 minutes</em>)</li>
+</ol>
+<h2 id="1-安装node-js和npm-3-minutes"><a href="#1-安装node-js和npm-3-minutes" class="headerlink" title="1. 安装node.js和npm (3 minutes)"></a>1. 安装node.js和npm (<em>3 minutes</em>)</h2><h4 id="Mac-OS"><a href="#Mac-OS" class="headerlink" title="Mac OS:"></a>Mac OS:</h4><ol>
+<li><p>如果还没有安装brew的话输入以下命令:</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">/usr/bin/ruby -e &quot;$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)&quot;</div></pre></td></tr></table></figure>
+</li>
+<li><p>之后安装node.js:</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">brew install node</div></pre></td></tr></table></figure>
+</li>
+</ol>
+<h4 id="Windows"><a href="#Windows" class="headerlink" title="Windows:"></a>Windows:</h4><ol>
+<li>从官网上下载和安装 <a href="https://nodejs.org/zh-cn/download/" target="_blank" rel="external">node</a><br> <em> 注意: 安装成功后，可能要重启电脑才能运行 </em></li>
+</ol>
+<h2 id="2-文件夹结构-3-minutes"><a href="#2-文件夹结构-3-minutes" class="headerlink" title="2. 文件夹结构 (3 minutes)"></a>2. 文件夹结构 (<em>3 minutes</em>)</h2><p>先上图:<br><img src="folder_structure.png" alt=""></p>
+<p>解释：</p>
+<ol>
+<li><strong> demo </strong> : 是我们要做的网站根目录的名字 </li>
+<li><strong> demo/node_modules </strong> : 网站依赖模块所在的文件夹 (无需自行创建，之后会自动生成)</li>
+<li><strong> demo/public </strong> : 前端代码的根目录</li>
+<li><strong> demo/public/app </strong> : AngularJS的根目录 (和Angular有关的前端代码都在这里开发)</li>
+<li><strong> demo/public/app/components </strong> : Angular的每个components在此目录下新建一个文件夹放view和controller</li>
+<li><strong> demo/public/app/components/home/homePage.html </strong> : Angular模块的范例，主页的html (MVC 的 View)</li>
+<li><strong> demo/public/app/components/home/homePageController.js </strong> : Angular模块的范例，主页的控制器 (MVC 的 Controller)</li>
+<li><strong> demo/public/app/app.js </strong> : AngularJS的入口文件</li>
+<li><strong> demo/public/stylesheets </strong> : 前端的css文件</li>
+<li><strong> demo/views </strong> : 服务器端渲染的html文件根目录</li>
+<li><strong> demo/views/home.jade </strong> : 入口文件 (<a href="https://naltatis.github.io/jade-syntax-docs/" target="_blank" rel="external">jade</a>是一种模版引擎，不知道的话可以简单理解成html)</li>
+<li><strong> demo/.gitignore </strong> : 如果项目在Github上备份的话，这里记录了不想同步的文件</li>
+<li><strong> demo/app.js </strong> : NodeJS的入口文件</li>
+<li><strong> demo/package.json </strong> : 设置文件</li>
+<li><strong> demo/README.md </strong> : 项目的描述</li>
+</ol>
+<h2 id="3-安装依赖模块-2-minutes"><a href="#3-安装依赖模块-2-minutes" class="headerlink" title="3. 安装依赖模块 (2 minutes)"></a>3. 安装依赖模块 (<em>2 minutes</em>)</h2><p>先创建好 <em>package.json</em> 文件， 然后输入以下内容：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div></pre></td><td class="code"><pre><div class="line">&#123;</div><div class="line">  &quot;name&quot;: &quot;&lt;网站名称&gt;&quot;,</div><div class="line">  &quot;version&quot;: &quot;&lt;版本号&gt;&quot;,</div><div class="line">  &quot;description&quot;: &quot;&lt;描述&gt;&quot;,</div><div class="line">  &quot;author&quot;: &quot;&lt;作者&gt;&quot;,</div><div class="line">  &quot;license&quot;: &quot;MIT&quot;,</div><div class="line">  &quot;scripts&quot;: &#123;</div><div class="line">    &quot;start&quot;: &quot;node app.js&quot;</div><div class="line">  &#125;,</div><div class="line">  &quot;dependencies&quot;: &#123;</div><div class="line">    &quot;angular&quot;: &quot;^1.6.2&quot;,</div><div class="line">    &quot;angular-route&quot;: &quot;^1.6.2&quot;,</div><div class="line">    &quot;body-parser&quot;: &quot;^1.16.0&quot;,</div><div class="line">    &quot;express&quot;: &quot;^4.14.1&quot;,</div><div class="line">    &quot;jade&quot;: &quot;^1.11.0&quot;,</div><div class="line">    &quot;jquery&quot;: &quot;^3.1.1&quot;,</div><div class="line">    &quot;path&quot;: &quot;^0.12.7&quot;,</div><div class="line">    &quot;save&quot;: &quot;^2.3.0&quot;</div><div class="line">  &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>之后在根目录下安装依赖模块:<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">npm install</div></pre></td></tr></table></figure></p>
+<p>安装结束后能看到，所有的 dependencies 都放在了 node_modules 文件夹内</p>
+<h2 id="4-编写-home-jade-2-minutes"><a href="#4-编写-home-jade-2-minutes" class="headerlink" title="4. 编写 home.jade (2 minutes)"></a>4. 编写 home.jade (<em>2 minutes</em>)</h2><p>先在指定文件夹内创建好 <em>home.jade</em> 文件， 然后输入以下内容：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div></pre></td><td class="code"><pre><div class="line">doctype html</div><div class="line">html</div><div class="line">  head</div><div class="line">    meta(charset=&apos;utf8&apos;)</div><div class="line"></div><div class="line">    script(src=&quot;/scripts/jquery.min.js&quot;)</div><div class="line">    script(src=&quot;/scripts/angular.min.js&quot;)</div><div class="line">    script(src=&quot;/scripts/angular-route.min.js&quot;)</div><div class="line"></div><div class="line">    script(src=&quot;/app/app.js&quot;)</div><div class="line">    script(src=&quot;/app/components/home/homePageController.js&quot;)</div><div class="line"></div><div class="line">  body(ng-app=&quot;demoApp&quot;)</div><div class="line">    ng-view</div></pre></td></tr></table></figure>
+<p>解释：</p>
+<ol>
+<li>就像正常写 html 一样，把需要的 js 文件放在 head 底下，第5小节会进一步描述文件结构</li>
+<li>正如第二小节所提到的，<em>/app/app.js</em> 是 AngularJS 的入口文件</li>
+<li>ng-app 后面跟的名字是所 AngularJS 的 app 名称，如果没用过 AngularJS 的话可以先往下看，之后再查其他教程学习一下这个前端框架</li>
+<li>注意，jade 文件支持用 tab 或者 空格 进行缩进，但不能混合使用 (和Python大法一样)</li>
+</ol>
+<h2 id="5-编写-node-js-的入口文件-5-minutes"><a href="#5-编写-node-js-的入口文件-5-minutes" class="headerlink" title="5. 编写 node.js 的入口文件 (5 minutes)"></a>5. 编写 node.js 的入口文件 (<em>5 minutes</em>)</h2><p>在根目录下创建好 <em>app.js</em> 文件，然后输入以下内容：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div></pre></td><td class="code"><pre><div class="line">var express = require(&apos;express&apos;);</div><div class="line">var http = require(&apos;http&apos;);</div><div class="line">var path = require(&apos;path&apos;);</div><div class="line">var bodyParser = require(&apos;body-parser&apos;);</div><div class="line"></div><div class="line">var port = 8088;  // default port</div><div class="line">var app = express();</div><div class="line"></div><div class="line">// view engine setup</div><div class="line">app.set(&apos;views&apos;, path.join(__dirname, &apos;views&apos;));</div><div class="line">app.set(&apos;view engine&apos;, &apos;jade&apos;);</div><div class="line"></div><div class="line">app.use(bodyParser.json());</div><div class="line">app.use(bodyParser.urlencoded(&#123; extended: false &#125;));</div><div class="line"></div><div class="line">app.use(express.static(path.join(__dirname, &apos;public&apos;)));</div><div class="line">app.use(&apos;/scripts&apos;, express.static(__dirname + &apos;/node_modules/jquery/dist&apos;));</div><div class="line">app.use(&apos;/scripts&apos;, express.static(__dirname + &apos;/node_modules/angular&apos;));</div><div class="line">app.use(&apos;/scripts&apos;, express.static(__dirname + &apos;/node_modules/angular-route&apos;));</div><div class="line"></div><div class="line">// entry page</div><div class="line">app.get(&apos;/&apos;, function(req, res) &#123;</div><div class="line">  res.render(&apos;home&apos;);</div><div class="line">&#125;);</div><div class="line"></div><div class="line">http.createServer(app)</div><div class="line">  .listen(port, function(server) &#123;</div><div class="line">    console.log(&apos;Listening on port %d&apos;, port);</div><div class="line">  &#125;);</div></pre></td></tr></table></figure></p>
+<p>解释：</p>
+<ol>
+<li>在这里，我们用到 node.js 的一个应用框架 <a href="http://expressjs.jser.us/" target="_blank" rel="external">Express.js</a></li>
+<li>第 10 行将 view 目录设置为 express 的视图层目录</li>
+<li>第 13-14 行表示用 json 格式来做文件的传输格式</li>
+<li>第 16 行设置了所有在 public 文件夹内的文件都为静态文件</li>
+<li>第 17-19 行将之前所安装的依赖模块设置成静态文件，并放在 <em>/scripts</em> 目录下 (可以再看一下 <em>home.jade</em> 是怎样访问这些文件的)</li>
+<li>第 22-24 行表示在访问网站根域名的时候显示 <em>home.jade</em> 文件内的信息</li>
+<li><p>现在可以启动网页服务器，并在任意游览器内通过 localhost:8088 来访问网页</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">npm start</div></pre></td></tr></table></figure>
+</li>
+<li><p>此时如果将 <em>home.jade</em> 文件改成以下内容，可以在网页中看到成功输出的 Hello World :P</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line">doctype html</div><div class="line">html</div><div class="line">  head</div><div class="line">    meta(charset=&apos;utf8&apos;)</div><div class="line">  body</div><div class="line">    p Hello World :P</div></pre></td></tr></table></figure>
+</li>
+</ol>
+<h2 id="6-编写-AngularJS-的入口文件-5-minutes"><a href="#6-编写-AngularJS-的入口文件-5-minutes" class="headerlink" title="6. 编写 AngularJS 的入口文件 (5 minutes)"></a>6. 编写 AngularJS 的入口文件 (<em>5 minutes</em>)</h2><p>创建 <em>demo/public/app/app.js</em> 文件，并输入以下内容：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div></pre></td><td class="code"><pre><div class="line">var app = angular.module(&quot;demoApp&quot;, [</div><div class="line">  &quot;ngRoute&quot;</div><div class="line">]);</div><div class="line"></div><div class="line">app.config([&quot;$routeProvider&quot;,</div><div class="line">  function($routeProvider) &#123;</div><div class="line">    $routeProvider.</div><div class="line">      when(&quot;/&quot;, &#123;</div><div class="line">        templateUrl: &quot;/app/components/home/homePage.html&quot;,</div><div class="line">        controller: &quot;homePageController&quot;</div><div class="line">      &#125;).</div><div class="line">      otherwise(&#123;</div><div class="line">        redirectTo: &quot;/&quot;</div><div class="line">      &#125;);</div><div class="line">  &#125;]);</div></pre></td></tr></table></figure></p>
+<p>接下来创建 <em>demo/public/app/components/home/homePage.html</em> 文件，并输入以下内容：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">&lt;h1&gt;&#123;&#123; message &#125;&#125;&lt;/h1&gt;</div></pre></td></tr></table></figure></p>
+<p>最后创建 <em>demo/public/app/components/home/homePageController.js</em> 文件，并输入以下内容：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">angular.module(&quot;demoApp&quot;).controller(&quot;homePageController&quot;,</div><div class="line">  [&quot;$scope&quot;, function($scope) &#123;</div><div class="line">    $scope.message = &quot;Hello World! :P&quot;;</div><div class="line">  &#125;]);</div></pre></td></tr></table></figure></p>
+<p>解释：</p>
+<ol>
+<li>第一行的 “demoApp” 变量名和 <em>home.jade</em> 文件中的 ng-app 名称所相对应</li>
+<li>这里用了 <a href="https://docs.angularjs.org/api/ngRoute" target="_blank" rel="external">ngRoute</a> 进行url跳转</li>
+<li>网站的主页通过 <em>homePage.html</em> 显示，<em>homePageController</em> 控制</li>
+<li><em>message</em> 变量中的 String 通过 <em>$scope</em> 双向绑定在html中显示</li>
+<li>现在可以启动服务器，通过 localhost:8088 访问网页，并看到成功显示 Hello World :P<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">npm start</div></pre></td></tr></table></figure>
+</li>
+</ol>
+<h2 id="7-结语"><a href="#7-结语" class="headerlink" title="7. 结语"></a>7. 结语</h2><p>你已经成功架构网页，接下来可以学习 <a href="http://expressjs.jser.us/" target="_blank" rel="external">Node</a> 和 <a href="http://www.apjs.net/" target="_blank" rel="external">Angular</a> (或者其他前端框架)继续开发你的项目 :P</p>
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/技术/" rel="tag"># 技术</a>
+          
+            <a href="/tags/教程/" rel="tag"># 教程</a>
+          
+            <a href="/tags/Node-js/" rel="tag"># Node.js</a>
+          
+            <a href="/tags/AngularJS/" rel="tag"># AngularJS</a>
+          
+        </div>
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2017/01/29/《一只特立独行的猪》/" rel="next" title="《一只特立独行的猪》">
+                <i class="fa fa-chevron-left"></i> 《一只特立独行的猪》
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+  <div class="comments" id="comments">
+    
+  </div>
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+            Table of Contents
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            Overview
+          </li>
+        </ul>
+      
+
+      <section class="site-overview sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+          <img class="site-author-image" itemprop="image"
+               src="/images/avatar.gif"
+               alt="Wang Yanhao" />
+          <p class="site-author-name" itemprop="name">Wang Yanhao</p>
+          <p class="site-description motion-element" itemprop="description">Yanhao's Blog | xirvana | Java | Javascript | 读后感</p>
+        </div>
+        <nav class="site-state motion-element">
+        
+          
+            <div class="site-state-item site-state-posts">
+              <a href="/archives">
+                <span class="site-state-item-count">5</span>
+                <span class="site-state-item-name">posts</span>
+              </a>
+            </div>
+          
+
+          
+
+          
+            <div class="site-state-item site-state-tags">
+              <a href="/tags">
+                <span class="site-state-item-count">12</span>
+                <span class="site-state-item-name">tags</span>
+              </a>
+            </div>
+          
+
+        </nav>
+
+        
+
+        <div class="links-of-author motion-element">
+          
+        </div>
+
+        
+        
+
+        
+        
+
+        
+
+
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#1-安装node-js和npm-3-minutes"><span class="nav-number">1.</span> <span class="nav-text">1. 安装node.js和npm (3 minutes)</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#Mac-OS"><span class="nav-number">1.0.1.</span> <span class="nav-text">Mac OS:</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Windows"><span class="nav-number">1.0.2.</span> <span class="nav-text">Windows:</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#2-文件夹结构-3-minutes"><span class="nav-number">2.</span> <span class="nav-text">2. 文件夹结构 (3 minutes)</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#3-安装依赖模块-2-minutes"><span class="nav-number">3.</span> <span class="nav-text">3. 安装依赖模块 (2 minutes)</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#4-编写-home-jade-2-minutes"><span class="nav-number">4.</span> <span class="nav-text">4. 编写 home.jade (2 minutes)</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#5-编写-node-js-的入口文件-5-minutes"><span class="nav-number">5.</span> <span class="nav-text">5. 编写 node.js 的入口文件 (5 minutes)</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#6-编写-AngularJS-的入口文件-5-minutes"><span class="nav-number">6.</span> <span class="nav-text">6. 编写 AngularJS 的入口文件 (5 minutes)</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#7-结语"><span class="nav-number">7.</span> <span class="nav-text">7. 结语</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright" >
+  
+  &copy; 
+  <span itemprop="copyrightYear">2017</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Wang Yanhao</span>
+</div>
+
+
+<div class="powered-by">
+  Powered by <a class="theme-link" href="https://hexo.io">Hexo</a>
+</div>
+
+<div class="theme-info">
+  Theme -
+  <a class="theme-link" href="https://github.com/iissnan/hexo-theme-next">
+    NexT.Muse
+  </a>
+</div>
+
+
+        
+
+        
+      </div>
+    </footer>
+
+    <div class="back-to-top">
+      <i class="fa fa-arrow-up"></i>
+    </div>
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+  
+  <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+
+  
+  <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+
+  
+  <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.0"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.0"></script>
+
+
+
+  
+  
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.0"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.0"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.0"></script>
+
+
+
+  
+
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+  
+  
+
+  
+
+  
+
+  
+
+  
+
+
+</body>
+</html>
